@@ -23,24 +23,37 @@ void bubbleSort(int arr[], int n) {
 }
 
 void selectionSort(int array[], int n) {
-    for (int i = 0; i < n-1; ++i) {
-        // Bucle interno para comparar elementos adyacentes
-        for (int j = 0; j < n-i-1; ++j) {
-            if (array[j] > array[j+1]) {
-                int tallest = array[j];
-                // Intercambiar
-                int temp = array[j];
-                array[j] = array[j+1];
-                array[j+1] = temp;
-                //tallest = array[-1];
-
+     for (int i = 0; i < n-1; ++i) {
+        int min_idx = i;  // Índice del elemento mínimo
+        
+        // Encontrar el elemento mínimo en el resto del arreglo
+        for (int j = i+1; j < n; ++j) {  // ✅ Comienza desde i+1
+            if (array[j] < array[min_idx]) {
+                min_idx = j;
             }
+        }
+        
+        // Intercambiar el elemento mínimo con array[i]
+        if (min_idx != i) {
+            int temp = array[min_idx];
+            array[min_idx] = array[i];
+            array[i] = temp;
         }
     }
 }
 
 void insertionSort(int arr[], int n) {
-    
+    for (int i = 1; i < n; ++i) {  // ✅ Comienza desde índice 1
+        int key = arr[i];          // ✅ Elemento a insertar
+        int j = i - 1;             // ✅ Posición anterior
+        
+        // Mover elementos mayores que key una posición adelante
+        while (j >= 0 && arr[j] > key) {  // ✅ Condición correcta
+            arr[j + 1] = arr[j];
+            j = j - 1;
+        }
+        arr[j + 1] = key;  // ✅ Insertar key en posición correcta
+    }
 }
 
 void merge(int arr[], int l, int m, int r) {
